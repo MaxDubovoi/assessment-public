@@ -6,7 +6,6 @@ import pandas as pd
 from client.log import get_logger
 from client.config import Config
 
-
 LOG = get_logger('client', 'client.log', level=logging.INFO)
 
 
@@ -15,6 +14,7 @@ class DataLayer:
     Handler to make requests.
     Expects a JSON response from the server.
     """
+
     def __init__(self):
         self.config = Config()
         LOG.info("Building the request module.")
@@ -33,8 +33,7 @@ class DataLayer:
             LOG.info(f)
             return r.post(
                 str(self.config.url),
-                files={'file':
-                    (str(self.config.data), f, 'text/csv', {'Expires': '0'})})
+                files={'file': (str(self.config.data), f, 'text/csv', {'Expires': '0'})})
 
     def parse_result(self, response):
         return response.json()
